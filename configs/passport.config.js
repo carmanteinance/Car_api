@@ -22,13 +22,14 @@ passport.use('local-auth', new LocalStrategy({ usernameField: 'email', passwordF
                 done(null, false, 'Incorrect email or password'); 
             } else {
                 return user.verifyPassword(password) 
-                    .then(correct => {
-                        correct? done(null, user) : done(null, false, 'Incorrect email or password');
+                    .then(isCorrect => {
+                        isCorrect? done(null, user) : done(null, false, 'Incorrect email or password');
                     })                       
             }
         })
-        .catch(error => done(err))
+        .catch(error => done(error))
     }
 ));
 
 //DIFERENCIAS ENTRE checkPassword y verifyPassword
+// Por que createError... se usa?
