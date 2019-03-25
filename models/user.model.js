@@ -1,6 +1,10 @@
 const mongoose = require ('mongoose');
+
 const bcrypt = require ('bcrypt');
 const SALT_WORK_FACTOR = 10;
+
+const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const PASSWORD_PATTERN = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
 
 const userSchema = new mongoose.Schema({
 
@@ -13,13 +17,15 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: [true, 'The email is required'],
       unique: true,
-      trim: true
+      trim: true,
+      match: [EMAIL_PATTERN, 'The email must have a correct format <example>@<example>.<example>']
       },
 
     password:{
       type: String,
       require: [true, 'You must have a password'],
-      minlength: 6
+      minlength: 6,
+      match: [PASSWORD_PATTERN, 'Passwords must contain at least six characters, including uppercase, lowercase letters and numbers.']
       },
 
     vehicles: {
@@ -51,9 +57,9 @@ const userSchema = new mongoose.Schema({
     } else {
       bcrypt.genSalt(SALT_WORK_FACTOR)
         .then(salt => {
-          return bcrypt.hash(user.password, salt)
+          return bcrypt.hash(this.password, salt)
             .then(hash => {
-              user.password = hash;
+              this.password = hash;
               next();
             })
         })
