@@ -1,9 +1,9 @@
 {
-  "name": "trello-api",
+  "name": "car_api",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=ex-social-auth:* nodemon -e hbs,js --inspect ./bin/www",
+    "dev": "DEBUG=car-api:* nodemon ./bin/www",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -16,7 +16,9 @@
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
     "mongoose": "^5.2.2",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"

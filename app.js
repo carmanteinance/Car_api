@@ -5,12 +5,17 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const logger = require('morgan');
+const passport = require('passport');
+
 
 //Routes
 const userRoutes = require('./routes/user.routes');
 
 
 require('./configs/db.config');
+require('./configs/passport.config')
+
 
 const session = require('./configs/session.config');
 
@@ -22,6 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(session);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Use Routes
 app.use('/', userRoutes);
