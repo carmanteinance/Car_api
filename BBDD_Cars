@@ -1,0 +1,45 @@
+{
+  "bmw": [
+    "serie 1",
+    "serie 2",
+    "serie 3",
+    "serie 5",
+    "serie 7"
+  ]
+  "Seat":[
+    "Altea",
+    "Ibiza",
+    "Toledo"
+    "Leon"
+  ]
+  "Ford":[
+    "Focus",
+    "Fiesta",
+    "Kuga",
+  ]
+  "Fiat":[
+    "500",
+    "500XL",
+    "Bravo",
+    "Sedan"
+  ]
+  "Renault":[
+    "Clio",
+    "Kadjar",
+    "Megane",
+    "Laguna",
+    "Scenic"
+  ]
+}
+
+//Para cuando hagamos la revision de lo que aplica o no el mantenimiento del tipo del coche
+
+    if (appliesOnlyTo) {
+      if (user.label === appliesOnlyTo) {
+        // esto significa que este campo tiene limitacion y le aplica a su coche
+      } else {
+        // el campo tiene limitacion pero no le aplica a su coche
+      }
+    } else {
+      // este campo no tiene ninguna limitacion por lo que aplica a TODOS los coches
+    }
