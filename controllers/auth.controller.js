@@ -3,23 +3,35 @@ const User = require ('../models/user.model');
 const passport = require('passport');
 
 //Feature REGISTER
-module.exports.register = (res, req, next) => {
-
-    const {email} = req.body;
-
+module.exports.register = (req, res, next) => {
+    const { email } = req.body;
     User.findOne({ email: email })
-        .then (user => {
+      .then(user => {
+        if (user) {
+          throw createError( 409, 'Upss this email is already registered. Are you? Go to Login')
+        } else {
+          return new User(req.body).save();
+        }
+      })
+      .then(user => res.status(201).json(user))
+      .catch(next)
+  }
+// module.exports.register = (res, req, next) => {
 
-            if(user){
-                throw createError( 409, 'Upss this email is already registered. Are you? Go to Login')
-            }else {
-                return new User(req.body).save();
-            }
-        })
+//     const { email } = req.body;
+//     User.findOne({ email: email })
+//         .then (user => {
 
-        .then(user => res.status(201).json(user))
-        .catch(next)
-}
+//             if(user){
+//                 throw createError( 409, 'Upss this email is already registered. Are you? Go to Login')
+//             }else {
+//                 return new User(req.body).save();
+//             }
+//         })
+
+//         .then(user => res.status(201).json(user))
+//         .catch(next)
+// }
 
 //Feature LOGIN
 

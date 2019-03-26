@@ -8,6 +8,7 @@ const passport = require('passport');
 
 
 //Routes
+const authRoutes = require ('./routes/auth.routes')
 const userRoutes = require('./routes/user.routes');
 
 
@@ -22,12 +23,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//aqui va el cors
 
 app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
 //Use Routes
+app.use('/', authRoutes)
 app.use('/', userRoutes);
 
 
