@@ -16,22 +16,7 @@ module.exports.register = (req, res, next) => {
       .then(user => res.status(201).json(user))
       .catch(next)
   }
-// module.exports.register = (res, req, next) => {
 
-//     const { email } = req.body;
-//     User.findOne({ email: email })
-//         .then (user => {
-
-//             if(user){
-//                 throw createError( 409, 'Upss this email is already registered. Are you? Go to Login')
-//             }else {
-//                 return new User(req.body).save();
-//             }
-//         })
-
-//         .then(user => res.status(201).json(user))
-//         .catch(next)
-// }
 
 //Feature LOGIN
 
