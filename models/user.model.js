@@ -26,16 +26,7 @@ const userSchema = new mongoose.Schema({
       require: [true, 'You must have a password'],
       minlength: 6,
       match: [PASSWORD_PATTERN, 'Passwords must contain at least six characters, including uppercase, lowercase letters and numbers.']
-      },
-
-    vehicles: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Car'
-        }
-      ]  
-    }
+      }
 
   },  {
     timestamps: true,
@@ -49,6 +40,13 @@ const userSchema = new mongoose.Schema({
       }
     }
   });
+
+  schema.virtual('car', {
+    ref:'Car',
+    localfield:'_id',
+    foreingField: 'user',
+    options: {sort: {brand: -1}}
+})
 
 userSchema.pre('save', function(next) {
     

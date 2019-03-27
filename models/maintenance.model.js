@@ -7,7 +7,34 @@ const MaintenanceEventSchema = new mongoose.Schema({
     type: Number,
     min: 0
   },
-  lastChangeDate: Date
+  dateLastChange: Date,
+
+  
+  kmNextChange: {
+    type: Number,
+    min: 0
+  },
+  dateNextChange: Date,
+
+  closeToKmChange:  {
+    type: Number,
+    min: 0
+  },
+  closeToDateChange: Date,
+
+
+  kmNextReview:  {
+    type: Number,
+    min: 0
+  },
+  dateNextReview: Date,
+
+  closeToKmReview:  {
+    type: Number,
+    min: 0
+  },
+  closeToDateReview: Date
+
 })
 
 const maintentanceEventFields = EVENT.reduce((acc, event) => {
@@ -20,6 +47,13 @@ const MaintenanceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Car'
   }
+})
+
+schema.virtual('car', {
+  ref:'Car',
+  localfield:'_id',
+  foreingField: 'Manteinance',
+  options: {sort: {brand: -1}}
 })
 
 const Maintenance = mongoose.model('Maintenance', MaintenanceSchema);
