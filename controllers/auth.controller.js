@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const User = require ('../models/user.model');
 const passport = require('passport');
 
-//Feature REGISTER
+
 module.exports.register = (req, res, next) => {
 
     const {email} = req.body;
@@ -18,7 +18,7 @@ module.exports.register = (req, res, next) => {
         .catch(next)
 }
 
-//Feature LOGIN
+
 module.exports.login = (req, res, next) => {
 
     passport.authenticate('local-auth', (error, user, message) => {
@@ -34,7 +34,7 @@ module.exports.login = (req, res, next) => {
     })(req,res,next);
 }
 
-//Feature LOGOUT
+
 module.exports.logout = (req, res, next) => {
     req.logout();
     res.status(201).json('Desconectado correctamente');
