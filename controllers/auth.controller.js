@@ -22,5 +22,19 @@ module.exports.register = (res, req, next) => {
 }
 
 //Feature LOGIN
+module.exports.login = (res, req, next) => {
+
+    passport.authenticate('local-auth', (error, user, message) => {
+
+        if (error){
+            next(error);
+        } else if (user){
+            req.login(user,(error) => 
+                error? next(error) : res.status(201).json(user))
+        } else{
+            next(createError(401, message));
+        }
+    })
+}
 
 //Feature LOGOUT
