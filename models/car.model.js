@@ -3,6 +3,15 @@ const mongoose = require('mongoose');
 const TYPE = ['Gasoline', 'Diesel', 'Hybrid', 'Electric'];
 
 const CarSchema = new mongoose.Schema({
+  user:{
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        require: true,
+      }
+    ]  
+  },
   brand: {
     type: String,
     required: true
@@ -11,7 +20,7 @@ const CarSchema = new mongoose.Schema({
     type: String,
   },
   carNumber: {
-    type: Number,
+    type: String,
     required: true,
     unique: true
   },
@@ -21,11 +30,11 @@ const CarSchema = new mongoose.Schema({
   },
   km:{ //iniciales y los que vaya actualizando el usuario
     type:Number,
-    required:true
+    required: true
   },
   year:{ //importante para cuando se tiene que pasar la itv
     type:Number,
-    required:true
+    required: true
   },
   imageURl: {
     type: String,
@@ -45,13 +54,6 @@ const CarSchema = new mongoose.Schema({
       }
     }
   });
-
-schema.virtual('user', {
-    ref:'User',
-    localfield:'_id',
-    foreingField: 'car',
-    options: {sort: {brand: -1}}
-})
 
 const Car = mongoose.model('Car', CarSchema);
 
