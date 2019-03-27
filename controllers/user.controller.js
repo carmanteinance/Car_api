@@ -19,6 +19,6 @@ module.exports.editProfile = (req, res, next) => {
     Object.keys(req.body).forEach( prop => req.user[prop] = req.body[prop]);
 
     req.user.save()
-    .then(user => res.status(201).json(user, "Usuario edited"))
+    .then(user => res.status(201).json(user, 'User edited'))
     .catch(next)
 }

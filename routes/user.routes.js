@@ -6,6 +6,6 @@ const user = require('../controllers/user.controller');
 
 router.get('/my-profile', user.getProfile); 
 
-// router.put('/my-profile/edit', auth.editProfile);
+router.put('/my-profile/edit', user.editProfile);
 
 module.exports = router;
