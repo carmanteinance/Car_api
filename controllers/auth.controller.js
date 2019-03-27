@@ -35,7 +35,7 @@ module.exports.login = (req, res, next) => {
 }
 
 //Feature LOGOUT
-module.exports.login = (req, res, next) => {
+module.exports.logout = (req, res, next) => {
     req.logout();
-    res.status(201).json();
+    res.status(201).json('Desconectado correctamente');
 }
