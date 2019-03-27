@@ -41,11 +41,11 @@ const userSchema = new mongoose.Schema({
     }
   });
 
-  schema.virtual('car', {
-    ref:'Car',
-    localfield:'_id',
-    foreingField: 'user',
-    options: {sort: {brand: -1}}
+userSchema.virtual('car', {
+  ref:'Car',
+  localField:'_id',
+  foreignField: 'user',
+  options: {sort: {brand: -1}}
 })
 
 userSchema.pre('save', function(next) {

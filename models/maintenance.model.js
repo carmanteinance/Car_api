@@ -49,10 +49,10 @@ const MaintenanceSchema = new mongoose.Schema({
   }
 })
 
-schema.virtual('car', {
+MaintenanceEventSchema.virtual('car', {
   ref:'Car',
-  localfield:'_id',
-  foreingField: 'Manteinance',
+  localField:'_id',
+  foreignField: 'Manteinance',
   options: {sort: {brand: -1}}
 })
 
