@@ -24,6 +24,8 @@ module.exports.addCar = (req, res, next) =>{
 
 module.exports.doEdit = (req, res, next) =>{
 
+  delete req.body.user;
+
   Car.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(car => {
       if (!car) {
