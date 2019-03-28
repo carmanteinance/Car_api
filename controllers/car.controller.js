@@ -11,6 +11,19 @@ module.exports.list = (req, res, next) =>{
     .catch(next);
 }
 
+module.exports.getOne = (req, res, next) =>{
+
+  Car.findById(req.params.id)
+    .then(car => {
+      if(car){
+        res.status(201).json(car)
+      }else {
+        throw createError(404, 'car not found');
+      }
+    })
+    .catch(next)
+}
+
 module.exports.addCar = (req, res, next) =>{
 
   const car = new Car(req.body);
@@ -18,7 +31,6 @@ module.exports.addCar = (req, res, next) =>{
   car.save()
     .then(car => res.status(201).json(car))
     .catch(next);
-
 }
 
 
@@ -28,15 +40,13 @@ module.exports.doEdit = (req, res, next) =>{
 
   Car.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(car => {
-      if (!car) {
-        throw createError(404, 'car not found');
+      if (car) {
+        res.status(201).json(car);
       } else {
-        res.json(car);
+        throw createError(404, 'car not found');
       }
     })
     .catch(next);
-  
-
 }
 
 
