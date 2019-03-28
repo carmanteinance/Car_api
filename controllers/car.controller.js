@@ -52,6 +52,13 @@ module.exports.doEdit = (req, res, next) =>{
 
 module.exports.delete = (req, res, next) =>{
 
-  
-
+  Car.findByIdAndDelete(req.params.id)
+    .then(car => {
+      if (car){
+        res.json("Car deleted");
+      } else{
+        throw createError(404, 'car not found');
+      }
+    })
+    .catch(next)
 }

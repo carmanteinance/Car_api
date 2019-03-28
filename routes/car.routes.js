@@ -13,7 +13,7 @@ router.post('/my-cars/newCar', secure.isAuthenticated, car.addCar);
 
 router.put('/my-cars/edit/:id', secure.isAuthenticated, car.doEdit);
 
-router.delete('/my-cars/delete', secure.isAuthenticated, car.delete);
+router.delete('/my-cars/delete/:id', secure.isAuthenticated, car.delete);
 
 
 module.exports = router;
