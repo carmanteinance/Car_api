@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../controllers/user.controller');
-//falta middleware login+user
+const secure = require('../middleware/secure.middleware');
 
 
-router.get('/my-profile', user.getProfile); 
+router.get('/my-profile',secure.isAuthenticated, user.getProfile); 
 
-// router.put('/my-profile/edit', auth.editProfile);
+router.put('/my-profile/edit',secure.isAuthenticated, user.editProfile);
 
 module.exports = router;

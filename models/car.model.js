@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TYPE = ['Gasoline', 'Diesel', 'Hybrid', 'Electric'];
+const constants = require ('../BBDD_Cars');
 
 const CarSchema = new mongoose.Schema({
   user:{
@@ -14,6 +14,7 @@ const CarSchema = new mongoose.Schema({
   },
   brand: {
     type: String,
+    enum: constants.carsModels,
     required: true
   },
   model: {
@@ -26,7 +27,7 @@ const CarSchema = new mongoose.Schema({
   },
   engine: {
     type: String,
-    enum: TYPE
+    enum: constants.engineType
   },
   km:{ //iniciales y los que vaya actualizando el usuario
     type:Number,

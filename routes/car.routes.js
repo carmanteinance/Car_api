@@ -9,7 +9,7 @@ router.get('/my-cars', secure.isAuthenticated, car.list);
 
 router.post('/my-cars/newCar', secure.isAuthenticated, car.addCar);
 
-router.put('/my-cars/edit-car', secure.isAuthenticated, car.doEdit);
+router.put('/my-cars/edit/:id', secure.isAuthenticated, car.doEdit);
 
 router.delete('/my-cars/delete', secure.isAuthenticated, car.delete);
 
