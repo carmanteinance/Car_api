@@ -10,8 +10,8 @@ const passport = require('passport');
 //Routes
 
 const authRoutes = require ('./routes/auth.routes')
-
 const userRoutes = require('./routes/user.routes');
+const carRoutes = require('./routes/car.routes');
 
 
 require('./configs/db.config');
@@ -32,8 +32,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Use Routes
-app.use('/', authRoutes)
+app.use('/', authRoutes);
 app.use('/', userRoutes);
+app.use('/', carRoutes);
 
 
 app.use((req, res, next) => {
