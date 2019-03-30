@@ -1,24 +1,25 @@
 const mongoose = require('mongoose');
 
-const constants = require ('../BBDD_Cars');
+const constants = require ('./BBDD_Cars');
+const MaintenanceSchema = require('./maintenance.schema');
 
 const CarSchema = new mongoose.Schema({
-  user:{
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        require: true,
-      }
-    ]  
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User' 
   },
   brand: {
     type: String,
-    enum: constants.carsModels,
+    enum: Object.keys(constants.carsModels),
     required: true
   },
   model: {
     type: String,
+    validate: {
+      validator: function(model) {
+        return constants.carsModels[this.brand].includes(model);
+      }
+    }
   },
   carNumber: {
     type: String,
@@ -40,10 +41,10 @@ const CarSchema = new mongoose.Schema({
   imageURl: {
     type: String,
   },
-  event:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref: 'MainteSchema',
-  }
+  maintenance: {
+    type: MaintenanceSchema,
+    default: {}
+  },
 }, {
     timestamps: true,
     toJSON: {
