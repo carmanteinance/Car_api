@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const EVENTS = ["ITV", "oil", "filterOil", "breaksKit", "ac", "tires", "airFilter", "battery", "suspension", "chain", "coolant", "plugs", "heaters", "batteryCoolant"];
+const EVENTS = ["oil", "filterOil", "breaksKit", "ac", "tires", "airFilter", "battery", "suspension", "chain", "coolant", "plugs", "heaters", "batteryCoolant"];
 
 const MaintenanceEventSchema = new mongoose.Schema({
   
@@ -55,11 +55,6 @@ const nextRevisionKmData = {
   batteryCoolant: 70000
 }
 
-const nextRevisionTimeData = {
-  
-  ITV: 4 || 2 || 1,
-  
-}
 
 MaintenanceEventSchema.virtual('nextKmChange').get(function() {
   return this.kmLastChanged + nextChangeKmData[this.eventType] 
@@ -71,10 +66,6 @@ MaintenanceEventSchema.virtual('nextTimeChange').get(function() {
 
 MaintenanceEventSchema.virtual('nextKmReview').get(function() {
   return nextRevisionKmData[this.eventType]
-})
-
-MaintenanceEventSchema.virtual('nextTimeReview').get(function() {
-  return this.$parent.$parent._doc.year
 })
 
 
