@@ -14,5 +14,9 @@ router.put('/my-cars/edit/:id', secure.isAuthenticated, car.doEdit);
 
 router.delete('/my-cars/delete/:id', secure.isAuthenticated, car.delete);
 
+// Maintenance routes
+
+//router.get('/my-cars/:carId/maintenances', secure.isAuthenticated, car.listMaintenances);
+
 
 module.exports = router;
