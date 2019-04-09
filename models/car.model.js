@@ -30,11 +30,11 @@ const CarSchema = new mongoose.Schema({
     type: String,
     enum: constants.engineType
   },
-  km:{ //iniciales y los que vaya actualizando el usuario
+  km:{
     type:Number,
     required: true
   },
-  year:{ //importante para cuando se tiene que pasar la itv
+  year:{
     type: Date,
     required: true
   },
@@ -46,7 +46,8 @@ const CarSchema = new mongoose.Schema({
     default: {}
   },
   lastITV: {
-    type: Date
+    type: Date,
+    default: Date.now
   }
 }, {
     timestamps: true,
@@ -64,12 +65,13 @@ const CarSchema = new mongoose.Schema({
 
   CarSchema.virtual('nextITV')
     .get(function (){
+      
       const yearToday = new Date().getFullYear();
 
       if (yearToday - this.year <= 4){
-        return this.lastItvtoDateString() = 4+this.lastITV.getFullYear();
+        return this.lastItvtoDateString() = 4 + this.lastITV.getFullYear();
       } else if (yearToday - this.year >= 10){
-        return this.lastItv = 1+this.lastITV.getFullYear();
+        return this.lastItv = 1 + this.lastITV.getFullYear()();
       } else return this.lastItv = doc.lastITV.setYear(2);
     })
 
