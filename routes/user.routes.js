@@ -6,6 +6,6 @@ const secure = require('../middleware/secure.middleware');
 
 router.get('/my-profile',secure.isAuthenticated, user.getProfile); 
 
-router.put('/my-profile/edit',secure.isAuthenticated, user.editProfile);
+router.put('/my-profile',secure.isAuthenticated, user.editProfile);
 
 module.exports = router;
