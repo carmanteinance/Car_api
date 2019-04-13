@@ -36,7 +36,7 @@ const CarSchema = new mongoose.Schema(
       required: true
     },
     year: {
-      type: Date,
+      type: Number,
       required: true
     },
     imageURl: {
@@ -71,7 +71,6 @@ CarSchema.virtual("nextITV").get(function() {
   const yearToday = new Date().getFullYear();
 
   if (yearToday - this.year <= 4) {
-    // new Intl.DateTimeFormat('en-GB').format(year)
     return (this.nextITV = 4 + this.lastITV.getFullYear());
   } else if (yearToday - this.year >= 10) {
     return (this.nextITV = 1 + this.lastITV.getFullYear());
