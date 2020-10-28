@@ -2,20 +2,22 @@ const createError = require('http-errors');
 const User = require ('../models/user.model');
 const passport = require('passport');
 
+const { registerUser } = require('../services/user.service')
+
 
 module.exports.register = (req, res, next) => {
 
-    const {email} = req.body;
-    User.findOne({ email: email })
-        .then (user => {
-            if(user){
-                throw createError( 409, 'Upss this email is already registered. Are you? Go to Login')
-            }else {
-                return new User(req.body).save();
-            }
-        })
-        .then(user => res.status(201).json(user))
-        .catch(next)
+    const { email } = req.body;
+    try {
+        const newUser = registerUser(req.body);
+        return res.status(201).json(newUser);
+    } catch (ex) {
+        if (ex.message.test(/already exists$/)) {
+            next(createError(409, 'Upss this email is already registered'))
+        } else {
+            next(ex);
+        }
+    }
 }
 
 
