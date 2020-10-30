@@ -1,6 +1,26 @@
 {
-  "extends": ["react-app", "plugin:prettier/recommended"],
+  "env": {
+      "browser": true,
+      "es6": true
+  },
+  "extends": [
+      "react-app",
+      "plugin:react/recommended"
+  ],
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react"
+  ],
   "rules": {
-    "no-console": 1,
-    "quotes": ["error", "single", { "avoidEscape": true }]
+      "no-console": 1,
+      "quotes": ["error", "single", { "avoidEscape": true }],
+      //  error  JSX not allowed in files with extension '.js'
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
+}
